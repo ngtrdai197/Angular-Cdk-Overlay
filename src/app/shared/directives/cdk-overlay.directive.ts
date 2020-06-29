@@ -25,8 +25,8 @@ export class CdkOverlayDirective implements AfterViewInit, OnDestroy {
   private readonly hover$ = new Subject<boolean>();
   private portal: TemplatePortal;
   private positions: ConnectionPositionPair[] = [
-    POSITION_MAP.rightTop,
-    POSITION_MAP.right
+    POSITION_MAP.leftBottomEndTop,
+    POSITION_MAP.leftBottomCenterTop,
   ];
   private overlayRef: OverlayRef;
   private subscription = Subscription.EMPTY;
@@ -85,7 +85,7 @@ export class CdkOverlayDirective implements AfterViewInit, OnDestroy {
     const menuVisible$ = this.appCdkOverlay.visible$;
     const hover$ = merge(menuVisible$, this.hover$).pipe(
       debounceTime(100)
-      
+
     );
 
     /*  ---true---false----

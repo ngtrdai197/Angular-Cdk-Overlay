@@ -56,5 +56,13 @@ export const POSITION_MAP: { [key: string]: ConnectionPositionPair } = {
     leftBottom: new ConnectionPositionPair(
         { originX: 'start', originY: 'bottom' },
         { overlayX: 'end', overlayY: 'bottom' }
-    )
+    ),
+    leftBottomEndTop: new ConnectionPositionPair(
+        { originX: 'start', originY: 'bottom' },
+        { overlayX: 'end', overlayY: 'top' }
+    ),
+    leftBottomCenterTop: new ConnectionPositionPair(
+        { originX: 'start', originY: 'bottom' },
+        { overlayX: 'center', overlayY: 'top' }
+    ),
 };
