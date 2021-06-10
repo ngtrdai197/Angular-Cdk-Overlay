@@ -8,9 +8,14 @@ import { filter, tap, debounceTime } from 'rxjs/operators'
 import { POSITION_MAP } from '../../connection-position-pairs';
 import { EventPopperComponent } from '../../event-popper/event-popper.component';
 
-enum DialogState {
+const enum DialogState {
   opened = 'opened',
   closed = 'closed'
+}
+
+const enum TRIGGER_BY  {
+  click = 'click',
+  hover = 'hover'
 }
 
 @Directive({
@@ -18,7 +23,7 @@ enum DialogState {
 })
 export class CdkOverlayDirective implements AfterViewInit, OnDestroy {
   @Input() appCdkOverlay: EventPopperComponent;
-  @Input() triggerBy: 'click' | 'hover' = 'click'
+  @Input() triggerBy: TRIGGER_BY = TRIGGER_BY.click
 
   private dialogState = DialogState.closed;
   private click$ = new Subject<boolean>()
@@ -91,7 +96,7 @@ export class CdkOverlayDirective implements AfterViewInit, OnDestroy {
     /*  ---true---false----
      *  ---------------true----false
      */
-    const handle$ = this.triggerBy === 'hover' ? hover$ : this.click$;
+    const handle$ = this.triggerBy === TRIGGER_BY.hover ? hover$ : this.click$;
     handle$.pipe(
       tap(state => console.log(state))
     ).subscribe(value => {
@@ -108,7 +113,7 @@ export class CdkOverlayDirective implements AfterViewInit, OnDestroy {
     return new OverlayConfig({
       positionStrategy: positionStrategy,
       backdropClass: ['back-drop-modal'],
-      hasBackdrop: this.triggerBy !== 'hover',
+      hasBackdrop: this.triggerBy !== TRIGGER_BY.hover,
       scrollStrategy: this.overlay.scrollStrategies.reposition()
     })
   }
