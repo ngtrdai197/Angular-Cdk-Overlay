@@ -49,7 +49,7 @@ export class CdkOverlayDirective implements AfterViewInit, OnDestroy {
   }
 
   @HostListener('click', ['$event'])
-  onClick(event: MouseEvent) {
+  onClick(_event: MouseEvent) {
     if (!this.triggerBy) {
       return;
     }
